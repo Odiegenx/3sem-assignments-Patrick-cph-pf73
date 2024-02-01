@@ -2,8 +2,8 @@
 
 ## Overview
 
-- Your name
-- which assignment are included
+- Patrick Fabrin
+- 
 - which one are completed and which one are not
 
 ## Friday presentation
