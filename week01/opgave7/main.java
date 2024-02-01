@@ -20,12 +20,14 @@ public class main {
         //// 3
 
         System.out.println("total sum :"+transactions.stream().mapToDouble(Transaction::getAmount).sum());
-        Map<String, List<Transaction>> transactionsAsMapByCurrency = transactions.stream().collect(Collectors.groupingBy(x -> x.getCurrency()));
+        /////
+        Map<String, List<Transaction>> transactionsAsMapByCurrency = transactions.stream().collect(Collectors.groupingBy(Transaction::getCurrency));
         transactionsAsMapByCurrency.forEach((currency,transactionList) -> {
             System.out.println(currency);
             System.out.println("total sum of " + currency+": " + transactionList.stream()
                     .mapToDouble(Transaction::getAmount).average().getAsDouble());
         });
+        /////
          Transaction higestTransaction = transactions.stream()
                 .max(Comparator.comparing(Transaction::getAmount))
                 .get();
