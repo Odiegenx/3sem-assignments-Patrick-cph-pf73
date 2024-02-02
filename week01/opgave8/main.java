@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class main {
     public static void main(String[] args) throws IOException {
         System.out.println("------\n8.");
-        // How I use my memory storage class:
+        // How I use my memory storage:
         System.out.println("------\nMemory Storage:");
         // for string:
         DataStorage<String> stringMemoryStorage = new MemoryStorage<>();
@@ -19,7 +19,7 @@ public class main {
         int data = integerMemoryStorage.retrieve(integerMemoryID);
         System.out.println("We got our int back out: " +data);
 
-        // how I use my file storage class:
+        // how I use my file storage:
         System.out.println("-------\nFilestorage:");
         DataStorage<Integer> integerFileStorage = new FileStorage<>();
         String integerKey = integerFileStorage.store(555);
@@ -39,7 +39,7 @@ public class main {
         String stringData = stringFileStorage.retrieve(stringKey);
         System.out.println(stringData);
         stringFileStorage.delete(stringKey);
-        //// I am unsure if my above solution is 100% correct, have included my first attempt below:
+        //// I am unsure if my above solution is correct, have included my first attempt below: well at least an attempt was made.
         DataStorage<Double> doubleFileStorage = new FileStorage<>(Double.class);
         String doubleKey = doubleFileStorage.store(432.022);
         String doubleKey2 = doubleFileStorage.store(4.02);
@@ -47,5 +47,7 @@ public class main {
         double doubleData = doubleFileStorage.retrieveTest(doubleKey);
         System.out.println("info gotten successfully: " + doubleData);
         doubleFileStorage.delete(doubleKey);
+
+        // did not setup a database for database storage, you would not have access to it anyway.
     }
 }
