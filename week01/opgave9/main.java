@@ -9,23 +9,23 @@ public class main {
             try {
                 new Task().run();
             } catch (InterruptedException e) {
-                System.out.println("Completable future got an exception: " + e.getMessage());
+                throw new RuntimeException("Completable future got an exception: " + e.getMessage());
             }
-        }).exceptionally(e -> {
-            //System.out.println("Completable future got an exception: " + e.getMessage());
-            return null;
         });
         CompletableFuture<Void> future2 = CompletableFuture.runAsync(() -> {
             try {
                 new Task().run();
             } catch (InterruptedException e) {
-                System.out.println("Completable future got an exception: " + e.getMessage());
+                throw new RuntimeException("Completable future got an exception: " + e.getMessage());
             }
-        }).exceptionally(e -> {
-            //System.out.println("Completable future got an exception: " + e.getMessage());
-            return null;
         });
-        CompletableFuture<Void> futures = CompletableFuture.allOf(future1,future2);
+
+        CompletableFuture<Void> futures = CompletableFuture
+                .allOf(future1,future2)
+                .exceptionally(ex -> {   // exceptionally functions as a catch and runs what happens if it gets one.
+                System.out.println(ex.getMessage());
+                return null;
+                });
         /*
         need to add something that makes sure main waits for all the tasks to complete
         or main method will complete before the tasks are done, and nothing is printed.
@@ -46,15 +46,17 @@ public class main {
             try {
                 new Task().run();
             } catch (InterruptedException e) {
-                System.out.println(e.getMessage());
-                e.printStackTrace();
+                /*System.out.println(e.getMessage());
+                e.printStackTrace();*/
+                throw new RuntimeException("Executor Service got an exception: "+e.getMessage());
             }
         });
         executorService.submit(() -> {
             try {
                 new Task().run();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
+                throw new RuntimeException("Executor Service got an exception: "+e.getMessage());
             }
         });
         // the shutdown wait for all tasks to complete first.
