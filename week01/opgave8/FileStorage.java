@@ -2,49 +2,50 @@ package opgave8;
 
 import java.io.*;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class FileStorage<T> implements DataStorage<T> {
-    private String path = Paths.get("").toAbsolutePath() + "/filestorage.csv"; //"C:\\Users\\Bruger\\OneDrive\\Skrivebord\\Datamatiker\\3. sem\\afleveringer\\filestorage.csv";
+    private String path = "filestorage.csv"; //"C:\\Users\\Bruger\\OneDrive\\Skrivebord\\Datamatiker\\3. sem\\afleveringer\\filestorage.csv";
     private File file = new File(path);
-    // storing the data stype, had to make this work around to get my retrive function to work
+    // storing the data type, had to make this work around to get my retrive function to work
     private Class<T> dataType;
 
     // making the constructor set the data type
-    public FileStorage(Class<T> dataType) {
+    public FileStorage() {
+    }
+    public FileStorage(Class<T> dataType ){
         this.dataType = dataType;
     }
 
     @Override
     public String store(T data) {
-        FileWriter writer = null;
-        try {
-            //// where the information will the saved.
-            writer = new FileWriter(path);
-            writer.write(data.toString());
-            //// always remember to close the writer.
-            writer.close();
-            System.out.println("DataStore was stored succesfully");
-            return "filestorage.csv";
+        String key = UUID.randomUUID().toString();// generates a unid key
+        String dataAsString = data.toString(); // gets the data as a string.
+        String strToFile = key+","+dataAsString;
+        try (FileWriter writer = new FileWriter(path,true)) {
+            writer.write(strToFile+System.lineSeparator()); // writes to the file
+            return key;
         } catch (IOException e) {
-            System.out.println("something went wrong with the filewriter");
+            return "Something went wrong with the file writer";
         }
-        return null;
     }
     @Override
     public T retrieve(String source) {
-        // getting the file we are looking for:
-        file = new File(Paths.get("").toAbsolutePath() + "/"+source);
         T data = null;
         try {
             Scanner scan = new Scanner(file);
+            String keyToFind = source+",";
             while (scan.hasNextLine()) {
                 String line = scan.nextLine();
-                // converts to the right datatype.
-                data = converToType(line.trim());
+                if(line.contains(keyToFind)){
+                    String[] aarray = line.split(",");
+                    if(aarray.length >= 1){
+                        String valueAsString = aarray[1].trim();
+                        data = (T) valueAsString;
+                    }
+                    break;
+                }
             }
-            return data;
         } catch (FileNotFoundException e) {
             System.out.println("The file was not found");
         }catch (NullPointerException e){
@@ -52,14 +53,71 @@ public class FileStorage<T> implements DataStorage<T> {
         }
         return data;
     }
-    private T converToType(String value){
-        if(dataType == Integer.class){
+    public T retrieveTest(String source) {
+        T data = null;
+        try {
+            Scanner scan = new Scanner(file);
+            String keyToFind = source+",";
+            while (scan.hasNextLine()) {
+                String line = scan.nextLine();
+                if(line.contains(keyToFind)){
+                    String[] aarray = line.split(",");
+                    if(aarray.length >= 1){
+                        String valueAsString = aarray[1].trim();
+                        data = (T) convertToType(valueAsString.trim());
+                    }
+                    break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("The file was not found");
+        }catch (NullPointerException e){
+            System.out.println("Could not handle the datatype");
+        }
+        return data;
+    }
+    @Override
+    public void delete(String key) {
+            try {
+                try (Scanner scanner = new Scanner(file)) {
+                    String lineToRemove = key + ",";
+                    Map<String, String> tmpData = new HashMap<>();
+                    int count = 0;
+                    String deletedValue = null;
+                    while (scanner.hasNextLine()) {
+                        String currentLine = scanner.nextLine();
+                        String[] tmpStringArray = currentLine.split(",");
+                        if(currentLine.startsWith(lineToRemove)) {
+                            deletedValue = tmpStringArray[1];
+                        }else{
+                            tmpData.put(tmpStringArray[0], tmpStringArray[1]);
+                        }
+                        count++;
+                    }
+                    if(!tmpData.isEmpty() || count>=1) {
+                        Writer writer = new FileWriter(file);
+                        for (Map.Entry<String, String> entry : tmpData.entrySet()) {
+                            writer.write(entry.getKey() + "," + entry.getValue() + System.lineSeparator());
+                        }
+                        System.out.println("Delete function was successful, "+deletedValue+" got removed.");
+                        writer.close();
+                        return;
+                    }
+                    System.out.println("there was nothing to delete");
+                    return;
+                }
+            } catch (IOException e) {
+                System.out.println("Something went wrong with the delete operation: " + e.getMessage());
+            }
+        }
+    private T convertToType(String value) {
+        if (dataType == Integer.class) {
             return (T) Integer.valueOf(value);
-        }else if(dataType == String.class){
+        } else if (dataType == String.class) {
             return (T) value;
-        } else if(dataType == Double.class){
+        } else if (dataType == Double.class) {
             return (T) Double.valueOf(value);
-        }else {
+        } else {
             return null;
         }
     }

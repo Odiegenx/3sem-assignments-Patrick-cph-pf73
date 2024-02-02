@@ -20,8 +20,14 @@ public class main {
         aarray.add(67);
         aarray.add(7);
         Predicate<Integer> divBySeven = (x) -> x%7 == 0;
-        ArrayList divedBySeven = aarray.stream().map(x -> divBySeven.test(x)).collect(Collectors.toCollection(ArrayList::new));
-        divedBySeven.stream().forEach(System.out::println);
+        ArrayList<Boolean> divedBySeven = aarray.stream()
+                .map(divBySeven::test)
+                .collect(Collectors.toCollection(ArrayList::new));
+        aarray.forEach(System.out::println);
+        for(int i = 0;i<aarray.size();i++){
+            String tmp = divedBySeven.get(i) == false ? "No" : "Yes";
+            System.out.println("Can "+aarray.get(i)+" be devided by 7? "+ tmp+"!");
+        }
         ////
         System.out.println("-------------- \n3.2");
         //// 2.
@@ -57,14 +63,14 @@ public class main {
         };
         ArrayList<Employee> randomListOfEmployees = generateEmployeeList(10,getEmployee);
         randomListOfEmployees.stream()
-                .map(x -> x.getName())
+                .map(Employee::getName)
                 .forEach(System.out::println);
         ////
         System.out.println("-------- \n3.3");
         //// 3.
         System.out.println("Printed with comsumer:");
         Consumer<ArrayList<Employee>> printEmployeeList = list -> list.stream()
-                .map(x -> x.getName())
+                .map(Employee::getName)
                 .forEach(System.out::println);
         printEmployeeList.accept(randomListOfEmployees);
         ////
@@ -80,11 +86,14 @@ public class main {
         System.out.println("--------- \n3.5");
         //// 5.
         Predicate<Employee> ageCheckEmployeeList = x -> x.getAge() > 18 ? true : false;
-        StringBuilder newText = new StringBuilder();
-        newText.append("Is Employee is above 18?");
-        newText.append(ageCheckEmployeeList.test(randomListOfEmployees.get(0)) ? "\nYes" : newText.append("\nNo"));
-        newText.append("\nThier age: "+ randomListOfEmployees.get(0).getAge());
-        System.out.println(newText);
+        for(int i = 0 ; i < listOfEmployees.size(); i++) {
+            StringBuilder newText = new StringBuilder();
+            newText.append("Is Employee " +listOfEmployees.get(i).getName() +" above 18?");
+            newText.append(ageCheckEmployeeList.test(randomListOfEmployees.get(i)) ? "\nYes" : newText.append("\nNo"));
+            newText.append("\nThier age: " + randomListOfEmployees.get(i).getAge());
+            newText.append("----");
+            System.out.println(newText);
+        }
         ////
         //// Opgave 4
         System.out.println("------\n4.1");
@@ -112,7 +121,9 @@ public class main {
         ////
         System.out.println("-------\n4.5");
         Predicate<Employee> isBirthdayMarch = (emp) -> emp.getBirthday().getMonth().getValue() == 3;
-        ArrayList<Employee> employeesInMarch = listOfEmployees.stream().filter(isBirthdayMarch).collect(Collectors.toCollection(ArrayList::new));
+        ArrayList<Employee> employeesInMarch = listOfEmployees.stream()
+                .filter(isBirthdayMarch)
+                .collect(Collectors.toCollection(ArrayList::new));
         System.out.println("Numbers of Employees with a birthday in March: " + employeesInMarch.size());
         employeesInMarch.forEach(System.out::println);
     }

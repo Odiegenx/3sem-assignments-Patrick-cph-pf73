@@ -1,29 +1,37 @@
 package opgave8;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MemoryStorage<T> implements  DataStorage<T>{
-    ArrayList<T> storage = new ArrayList<>();
+    Map<String, T> mapStorage = new HashMap<>();
 
     @Override
     public String store(T data) {
-        if(data != null){
-            storage.add(data);
-            String id = ""+(storage.size()-1);
-            return id;
+        if(data != null) {
+            int key = mapStorage.size();
+            String strKey = "" + key;
+            mapStorage.put(strKey, data);
+            return strKey;
         }
         return "Data storage was unsuccessfully";
     }
     @Override
     public T retrieve(String source) {
-        if(source != null){
-            if(source.matches("[0-9]+")) {
-                int id = Integer.parseInt(source);
-                if (id <= storage.size()) {
-                    return storage.get(id);
-                }
-            }
+        if(source != null) {
+            return mapStorage.get(source);
         }
+        return null;
+    }
+
+    @Override
+    public void delete(String key) {
+        mapStorage.remove(key);
+    }
+
+    @Override
+    public T retrieveTest(String doubleKey) {
         return null;
     }
 }

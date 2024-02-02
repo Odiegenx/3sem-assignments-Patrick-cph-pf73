@@ -28,14 +28,37 @@ public class main {
         //// 3.
         System.out.println("-------\n3.");
         //// Average rating :
-        double sum = bookList.stream().map(x -> x.getRating())
+        double sum = bookList.stream().map(Book::getRating)
                 .reduce((x,y) -> Double.sum(x,y))
                 .get();
         // double sum1 = bookList.stream().mapToDouble(x -> x.getRating()).sum(); // just tested to see if it worked.
-        // OptionalDouble sum2 = bookList.stream().mapToDouble(x -> x.getRating()).average(); // just tested to see if it worked.
         double averageRating = sum / bookList.size();
         DecimalFormat decimalFormat = new DecimalFormat("#.#");
         System.out.println("The average rating of the books are: " + decimalFormat.format(averageRating));
+        /////////////////
+        // Imperative approach
+        double testSum = 0;
+        for (Book b: bookList) {
+            testSum += b.rating;
+        }
+        double testAverageRating = testSum / bookList.size();
+        System.out.println("(Imperative) The test rating: "+ testAverageRating);
+        ///
+        //Declarative approach:
+        OptionalDouble averageRatingTest = bookList.stream()
+                .mapToDouble(Book::getRating)
+                .average();
+        System.out.println("(Declarative) The test rating: " + averageRatingTest.getAsDouble());
+        ////////////////
+
+
+
+
+
+
+
+
+
         System.out.println("------");
         //// Finding books published after a certain year:
         int yearToCheck = 1950;
@@ -60,11 +83,13 @@ public class main {
                 .forEach(System.out::println);
         System.out.println("--------");
         ////
+        // getting highest rated book
         System.out.println("Highest rated book is: ");
         Book bestBook = bookList.stream().max(Comparator.comparing(getRating)).get();
         System.out.println(bestBook.getTitle());
         ////
         System.out.println("-----");
+        // grouping the books by author in a map and getting the average rating of their books
         Map<String, List<Book>> groupByAuthor = bookList.stream()
                 .collect(Collectors.groupingBy(book -> book.getAuthor()));
         groupByAuthor.forEach((author,books) ->{
@@ -76,6 +101,7 @@ public class main {
             }
         });
         ////
+        // Total sum of all the pages in the book list
         System.out.println("----------");
         int totalPages = bookList.stream().mapToInt(x -> x.getPages()).sum();
         System.out.println("Total amount of pages: "+totalPages);
