@@ -22,7 +22,7 @@ public class main {
 
         CompletableFuture<Void> futures = CompletableFuture
                 .allOf(future1,future2)
-                .exceptionally(ex -> {   // exceptionally functions as a catch and runs what happens if it gets one.
+                .exceptionally(ex -> {   // exceptionally functions as a catch and executes if it gets one.
                 System.out.println(ex.getMessage());
                 return null;
                 });
