@@ -4,7 +4,7 @@ import java.io.*;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class FileStorage<T> implements DataStorage<T> {
+public class FileStorage<T extends Serializable > implements DataStorage<T> {
     private String path = "filestorage.csv"; //"C:\\Users\\Bruger\\OneDrive\\Skrivebord\\Datamatiker\\3. sem\\afleveringer\\filestorage.csv";
     private File file = new File(path);
     // storing the data type, had to make this work around to get my retrive function to work

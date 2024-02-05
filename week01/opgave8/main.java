@@ -48,6 +48,6 @@ public class main {
         System.out.println("info gotten successfully: " + doubleData);
         doubleFileStorage.delete(doubleKey);
 
-        // did not setup a database for database storage, you would not have access to it anyway.
+        // did not set up a database for database storage, you would not have access to it anyway.
     }
 }
