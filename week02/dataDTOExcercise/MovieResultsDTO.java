@@ -16,8 +16,7 @@ public class MovieResultsDTO {
 
     @Override
     public String toString() {
-        return "MovieResultsDTO{" +
-                "movie_results=" + Arrays.toString(movie_results) +
+        return "movie_results=" + Arrays.toString(movie_results) +
                 '}';
     }
 }
