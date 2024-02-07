@@ -26,7 +26,6 @@ class MovieControllerTest {
         movieTitles.add("The Good, the Bad and the Ugly");
         movieTitles.add("Forrest Gump");
         movieTitles.add("Fight Club");
-        // in case it finds more than 1 result it prints the first one.
         ArrayList<MovieSearchResultsDTO> testResult = movieTitles.stream().map(movieController::search).collect(Collectors.toCollection(ArrayList::new));
         for(int i = 0;i < movieTitles.size();i++){
             assertEquals(movieTitles.get(i),testResult.get(i).getResults().get(0).getTitle());

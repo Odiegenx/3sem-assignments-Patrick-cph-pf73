@@ -22,7 +22,7 @@ public class main {
         // 3. Adding functionality:
         MovieController movieController = new MovieController();
        // System.out.println(movieController.getMovieswithHigherRatingThan(8.5));
-        // gettign all movies with 8.5 ratings.
+        // gettign all movies with higher than 8.5 ratings.
         double rating = 8.5;
         MovieSearchResultsDTO ratingsSearch =  movieController.getMoviesWithHigherRatingThan(rating);
         System.out.println(ratingsSearch.getResults().size());

@@ -1,0 +1,94 @@
+{
+  "accounts": [
+    {
+      "firstName": "Lars",
+      "lastName": "Petersen",
+      "birthDate": "28/9/1995",
+      "address": {
+        "street": "Købmagergade 4",
+        "city": "København",
+        "zipCode": 2300
+      },
+      "account": {
+        "id": "g22lafm",
+        "balance": "200000 DKK",
+        "isActive": true
+      }
+    },
+    {
+      "firstName": "Didver",
+      "lastName": "Larsen",
+      "birthDate": "11/4/1946",
+      "address": {
+        "street": "Istedgade 10",
+        "city": "København",
+        "zipCode": 1650
+      },
+      "account": {
+        "id": "h453kn5",
+        "balance": "1540000 DKK",
+        "isActive": true
+      }
+    },
+    {
+      "firstName": "Gertrud",
+      "lastName": "Harden",
+      "birthDate": "2/11/1980",
+      "address": {
+        "street": "Aksel Møllers Have 5",
+        "city": "Frederiksberg",
+        "zipCode": 2000
+      },
+      "account": {
+        "id": "s4372ng",
+        "balance": "600532 DKK",
+        "isActive": true
+      }
+    },
+    {
+      "firstName": "Lise",
+      "lastName": "Vinter",
+      "birthDate": "1/8/1922",
+      "address": {
+        "street": "Strandby Kirkevej 22",
+        "city": "Esbjerg",
+        "zipCode": 6705
+      },
+      "account": {
+        "id": "b534nts",
+        "balance": "3670532 DKK",
+        "isActive": false
+      }
+    },
+    {
+      "firstName": "Mark",
+      "lastName": "Zuckerberg",
+      "birthDate": "14/5/1984",
+      "address": {
+        "street": "Palo Alto",
+        "city": "California",
+        "zipCode": 94020
+      },
+      "account": {
+        "id": "as4532n",
+        "balance": "167245450 USD",
+        "isActive": true
+      }
+    },
+    {
+      "firstName": "Jonesy",
+      "lastName": "Fortnite",
+      "birthDate": "21/7/2017",
+      "address": {
+        "street": "Athena",
+        "city": "Tilted Towers",
+        "zipCode": 99999
+      },
+      "account": {
+        "id": "ty452hn",
+        "balance": "10000000000 USD",
+        "isActive": true
+      }
+    }
+  ]
+}
