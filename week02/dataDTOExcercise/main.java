@@ -40,7 +40,7 @@ public class main {
         System.out.println(releaseYearSearch);
         System.out.println(releaseYearSearch.getResults().size());
 
-        // Movies to Find:
+        // Movies to Find (also made a unit test(check bookmarks)):
         ArrayList<String> movieTitles = new ArrayList<>();
         movieTitles.add("The Shawshank Redemption");
         movieTitles.add("The Godfather");
