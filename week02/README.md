@@ -2,9 +2,9 @@
 
 ## Overview
 
-- Your name
-- which assignment are included
-- which one are completed and which one are not
+- Patrick Fabrin
+- This should be my completed assignment for week 2.
+- skipped number 5 in task 6 as it was "extra"
 
 ## Friday presentation
 - add the friday presentation into the weekly folder
