@@ -2,22 +2,13 @@ package threadExcercise;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import dataDTOExcercise.movieController.MoviePageInfoDTO;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import threadExcercise.DTOs.PokemonResultsDTO;
+import threadExcercise.DTOs.*;
 
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.*;
-import java.util.function.Function;
 
 public class Task6 {
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -29,41 +20,49 @@ public class Task6 {
         String url5 = "https://api.whatdoestrumpthink.com/api/v1/quotes/random";
         String url6 = "https://api.agify.io/?name=Patrick";
         String url7 = "https://dog.ceo/api/breeds/image/random";
-        String url8 = "https://restcountries.com/v3.1/name/India?fullText=true";
+        String url8 = "http://numbersapi.com/random/trivia?json";
         String url9 = "https://catfact.ninja/fact";
         String url10 = "https://www.boredapi.com/api/activity";
-        ArrayList<String> urlList = new ArrayList<>();
-        urlList.add(url1);
-        //urlList.add(url2);
-        urlList.add(url3);
-        urlList.add(url4);
-        urlList.add(url5);
-        urlList.add(url6);
-        urlList.add(url7);
-        urlList.add(url8);
-        urlList.add(url9);
-        urlList.add(url10);
-        String connection1 = DTOController.getResponse1("https://pokeapi.co/api/v2/pokemon/");
-        //System.out.println(connection1);
-        Object blah = DTOController.getDTO(connection1, PokemonResultsDTO.class);
-        //System.out.println(blah);
-        /*
-        ExecutorService myService = Executors.newCachedThreadPool();
-        for(int i = 0; i < urlList.size();i++) {
-            myService.submit(() -> {
-                //String connection11 = getResponse(urlList.get(i));
-                System.out.println(connection11);
-            });
-        }
-        */
-            String blag = DTOController.getResponse1(url1);
-            DTOController.getPokemonResultsDTO(blag);
-        //DTOController.getResponse1(url2).toString();
+        Map<String,Class> urlMap = new HashMap<>();
+        urlMap.put(url1,PokemonResultsDTO.class);
+        urlMap.put(url2, DadJokeDTO.class);
+        urlMap.put(url3, ChuckNorrisJokeDTO.class);
+        urlMap.put(url4, KanyeRestDTO.class);
+        urlMap.put(url5, WhatTrumpThinksDTO.class);
+        urlMap.put(url6, PatrickDTO.class);
+        urlMap.put(url7, DogBreedDTO.class);
+        urlMap.put(url8, RandomTriviaDTO.class);
+        urlMap.put(url9, CatFactDTO.class);
+        urlMap.put(url10, GetActivityDTO.class);
             // ----------------------------------------
         ExecutorService myService = Executors.newCachedThreadPool();
-        Future<PokemonResultsDTO> future1 = myService.submit(() -> {
-            return gson.fromJson(DTOController.getResponse1(url1), PokemonResultsDTO.class);
-        });
+        ArrayList<Future<DTOInterface>> futures = new ArrayList<>();
+        for (Map.Entry<String, Class> entry : urlMap.entrySet()) {
+            String url = entry.getKey();
+            Class dtoClass = entry.getValue();
+            futures.add(myService.submit(() -> {
+                return DTOController.getResponse1(url, dtoClass);
+            }));
+        }ArrayList<DTOInterface> results = new ArrayList<>();
+        for (Future<DTOInterface> future: futures) {
+            DTOInterface tmpFuture = future.get();
+            results.add(tmpFuture);
+            System.out.println(tmpFuture.getResults());
+            System.out.println("--------------------------------------------");
+        }
+
+        MegaDTO megaDTO = DTOController.createMegaDTO(futures);
+        //MegaDTO megaDTO1 = DTOController.createMegaDTO1(results);
+        System.out.println(megaDTO);
+        //System.out.println(megaDTO1);
+        myService.shutdown();
+        try {
+           boolean isdone = myService.awaitTermination(10, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    /*
         Future<PokemonResultsDTO> future2 = myService.submit(() -> {
             return gson.fromJson(DTOController.getResponse1(url2), PokemonResultsDTO.class);
         });
@@ -91,10 +90,5 @@ public class Task6 {
         Future<PokemonResultsDTO> future10 = myService.submit(() -> {
             return gson.fromJson(DTOController.getResponse1(url1), PokemonResultsDTO.class);
         });
-        future1.get().toString();
-        myService.shutdown();
-        myService.awaitTermination(1500,TimeUnit.MICROSECONDS);
-
-
-    }
+    */
 }

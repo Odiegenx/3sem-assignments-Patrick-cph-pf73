@@ -6,9 +6,8 @@ public class PokemonDTO {
 
     @Override
     public String toString() {
-        return "name='" + name +
-                "url='" + url +
-                '}' + "\n";
+        return "name='" + name +"\n"+
+                "url='" + url+ "\n";
     }
 
     public String getName() {
