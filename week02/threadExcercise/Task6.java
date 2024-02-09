@@ -36,6 +36,7 @@ public class Task6 {
         urlMap.put(url10, GetActivityDTO.class);
             // ----------------------------------------
         ExecutorService myService = Executors.newCachedThreadPool();
+        //ExecutorService myService = Executors.newFixedThreadPool(4);
         ArrayList<Future<DTOInterface>> futures = new ArrayList<>();
         for (Map.Entry<String, Class> entry : urlMap.entrySet()) {
             String url = entry.getKey();

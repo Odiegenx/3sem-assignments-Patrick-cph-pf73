@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class main {
     public static void main(String[] args) {
+
         // task 1:
         Task1 task1 = new Task1();
         ExecutorService myService = Executors.newFixedThreadPool(4);
@@ -29,6 +30,7 @@ public class main {
         System.out.println(Counter.getCount());
     }
     private static class Counter {
+
         private static int count = 0;
 
         // Method to increment the count, synchronized to ensure thread safety

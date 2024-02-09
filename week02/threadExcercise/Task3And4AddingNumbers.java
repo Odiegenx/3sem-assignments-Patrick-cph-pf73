@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class AddingNumbers {
+public class Task3And4AddingNumbers {
 
     public static void main(String[] args) {
         //ExecutorService workingJack = Executors.newFixedThreadPool(17);
 
         /*
             To solve task 4. I changed the executorService to a newCachedThreadPool. newCachedThreadPool allows
-            the Executor Service to take the necessary resources it needs to complete its task.
+            the Executor Service to take the necessary resources it needs to complete its task as fast as possible.
          */
         ExecutorService workingJack = Executors.newCachedThreadPool();
         System.out.println("Main starts");

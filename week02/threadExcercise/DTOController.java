@@ -18,7 +18,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-public class DTOController {
+public class DTOController{
     static CloseableHttpClient httpClient = HttpClients.createDefault();
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     String url;

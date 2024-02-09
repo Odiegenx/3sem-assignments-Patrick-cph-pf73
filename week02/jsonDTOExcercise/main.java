@@ -13,6 +13,32 @@ public class main {
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     public static void main(String[] args) {
         // part 1:
+        /*
+            What does JSON stand for?:
+            JavaScript Object Notation. It's a text format for storing and transporting data
+
+            What is the difference between JSON and XML?
+            JSON is quicker to read, doesn't use end tags,
+            is shorter and can use arrays!
+            JSON is much simpler to parse than XML and Json is
+            parsed into a ready to use JS object.
+            Also, JSON is generally faster to use.
+
+            For what is JSON generally used for?:
+            For staring and transporting information, mostly between computers / web servers.
+
+            Write down the 6 data types in JSON:
+            Stings, numbers, objects(JSON object), arrays, boolean and null.
+            it cannot store: a function,
+                             a date,
+                             and undefined.
+
+            Write down the 4 JSON syntax rules:
+            The data is stored by name/value pair(names are written in double quotes and values as well if it's a string,seperated by a colon),
+            data / objects are separated by cammas,
+            curly brackets holds objects,
+            square brackets holds arrays.
+         */
 
         // part 2: look in the account.json file
 

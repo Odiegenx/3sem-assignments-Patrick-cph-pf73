@@ -4,6 +4,6 @@ package dataDTOExcercise.interfaces;
 import dataDTOExcercise.movieController.Media;
 
 public interface mediaInterface<T extends Media> {
-    T getMoviesWithHigherRatingThan(double rating);
-    T getMoviesSortedByReleaseDate(int releaseYear);
+    T getMediaWithHigherRatingThan(double rating);
+    T getMediaSortedByReleaseDate(int releaseYear);
 }

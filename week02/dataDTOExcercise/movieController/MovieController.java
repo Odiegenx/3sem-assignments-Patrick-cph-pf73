@@ -34,7 +34,7 @@ public class MovieController implements mediaInterface<MovieSearchResultsDTO> {
         }
     }
 */
-    public MovieSearchResultsDTO getMoviesWithHigherRatingThan(double rating) {
+    public MovieSearchResultsDTO getMediaWithHigherRatingThan(double rating) {
         // the new "improved" version:
         ArrayList<MovieSearchDTO> allResults = new ArrayList<>();
         int totalpages = 1;
@@ -111,7 +111,7 @@ public class MovieController implements mediaInterface<MovieSearchResultsDTO> {
 
 
     @Override
-    public MovieSearchResultsDTO getMoviesSortedByReleaseDate(int releaseYear) {
+    public MovieSearchResultsDTO getMediaSortedByReleaseDate(int releaseYear) {
         ArrayList<MovieSearchDTO> allResults = new ArrayList<>();
         int totalpages = 1;
         for (int currentPage = 1; currentPage <= totalpages; currentPage++) {

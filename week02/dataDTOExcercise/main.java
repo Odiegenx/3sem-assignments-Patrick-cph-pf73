@@ -18,25 +18,23 @@ public class main {
         //task: 1 Get movie by movie ID:
         String responceBody1 = getResponceByMovieID("tt5177120");
         System.out.println(getMovieDTO(responceBody1));
-        //System.out.println(getMovieDTO(getResponceByMovieID("r3r235")));
         // 3. Adding functionality:
         MovieController movieController = new MovieController();
        // System.out.println(movieController.getMovieswithHigherRatingThan(8.5));
         // gettign all movies with higher than 8.5 ratings.
         double rating = 8.5;
-        MovieSearchResultsDTO ratingsSearch =  movieController.getMoviesWithHigherRatingThan(rating);
+        MovieSearchResultsDTO ratingsSearch =  movieController.getMediaWithHigherRatingThan(rating);
         System.out.println(ratingsSearch.getResults().size());
         System.out.println(ratingsSearch);
          /*
         Turns out my request contains 1000+ pages and it seems like there's a limit for how many requests I can make on the api.
         So ended up limiting my request to 100 pages.
         */
-
         MovieSearchResultsDTO ratingsSearchNoLimit = movieController.getAllMoviesWithHigherRatingThanNoLimit(rating);
         System.out.println(ratingsSearchNoLimit.getResults());
         System.out.println(ratingsSearchNoLimit.getResults().size());
         int releaseYear = 2023;
-        MovieSearchResultsDTO releaseYearSearch = movieController.getMoviesSortedByReleaseDate(releaseYear);
+        MovieSearchResultsDTO releaseYearSearch = movieController.getMediaSortedByReleaseDate(releaseYear);
         System.out.println(releaseYearSearch);
         System.out.println(releaseYearSearch.getResults().size());
 
