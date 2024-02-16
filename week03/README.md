@@ -1,10 +1,9 @@
 # Assignment Readme Guidelines
 
 ## Overview
-
-- Your name
-- which assignment are included
-- which one are completed and which one are not
+- Patrick Fabrin
+- This should be my completed assignment for week 3.
+- everything should be completet and the tests for the different assignments are in the test folder. 
 
 ## Friday presentation
 - add the friday presentation into the weekly folder
