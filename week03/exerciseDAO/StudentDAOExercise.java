@@ -1,19 +1,16 @@
-package lifeCycleAndAnnotationsJPA;
+package exerciseDAO;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.time.LocalDate;
 
 @Entity
 @ToString
 @Getter
 @Setter
-@Table(name = "students")
-public class Student {
+@Table(name = "studentdaoexercise")
+public class StudentDAOExercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -25,15 +22,11 @@ public class Student {
     private String email;
     @Column(name = "age")
     private int age;
-    @Temporal(TemporalType.DATE)
-    private LocalDate createdAt;
-    @Temporal(TemporalType.DATE)
-    private LocalDate updatedAT;
-    public Student(){
+    public StudentDAOExercise(){
 
     }
 
-    public Student(String firstName, String lastName, String email, int age) {
+    public StudentDAOExercise(String firstName, String lastName, String email, int age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -43,20 +36,16 @@ public class Student {
     public void preUpdate() {
         this.firstName = firstName.toLowerCase();
         this.lastName = lastName.toLowerCase();
-        this.updatedAT = LocalDate.now();
-        if (this.email.contains("@")) {
+        if(this.email.contains("@")){
             this.email = email.toLowerCase();
-        } else {
+        }else {
             throw new RuntimeException("Email was not valid");
         }
-
     }
     @PrePersist
     public void prePersist() {
         this.firstName = firstName.toLowerCase();
         this.lastName = lastName.toLowerCase();
-        this.updatedAT = LocalDate.now();
-        this.createdAt = LocalDate.now();
         if(this.email.contains("@")){
             this.email = email.toLowerCase();
         }else {
