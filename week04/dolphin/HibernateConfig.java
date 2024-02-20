@@ -1,14 +1,12 @@
-package GLSPackageTrackingSystem;
+package dolphin;
 
-import exerciseDAO.StudentDAOExercise;
+import dolphin.DTO.NoteWithNameAndAgeDTO;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import unicorn.Person;
-import unicorn.Unicorn;
 
 import java.util.Properties;
 
@@ -23,24 +21,27 @@ public class HibernateConfig {
 
             Properties props = new Properties();
 
-            props.put("hibernate.connection.url", "jdbc:postgresql://localhost:5432/exercise?currentSchema=public");
+            props.put("hibernate.connection.url", "jdbc:postgresql://localhost:5432/dolphin?currentSchema=public");
             props.put("hibernate.connection.username", "postgres");
             props.put("hibernate.connection.password", "postgres");
-            props.put("hibernate.show_sql", "false"); // show sql in console
-            props.put("hibernate.format_sql", "false"); // format sql in console
-            props.put("hibernate.use_sql_comments", "false"); // show sql comments in console
+            props.put("hibernate.show_sql", "true"); // show sql in console
+            props.put("hibernate.format_sql", "true"); // format sql in console
+            props.put("hibernate.use_sql_comments", "true"); // show sql comments in console
 
             props.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect"); // dialect for postgresql
             props.put("hibernate.connection.driver_class", "org.postgresql.Driver"); // driver class for postgresql
             props.put("hibernate.archive.autodetection", "class"); // hibernate scans for annotated classes
             props.put("hibernate.current_session_context_class", "thread"); // hibernate current session context
             props.put("hibernate.hbm2ddl.auto", "update"/*"create-drop"*/); // hibernate creates tables based on entities
+
+
             return getEntityManagerFactory(configuration, props);
         } catch (Throwable ex) {
             System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
         }
     }
+
     private static EntityManagerFactory setupHibernateConfigurationForTesting() {
         try {
             Configuration configuration = new Configuration();
@@ -59,7 +60,6 @@ public class HibernateConfig {
             throw new ExceptionInInitializerError(ex);
         }
     }
-
     private static EntityManagerFactory getEntityManagerFactory(Configuration configuration, Properties props) {
         configuration.setProperties(props);
 
@@ -75,7 +75,11 @@ public class HibernateConfig {
     private static void getAnnotationConfiguration(Configuration configuration) {
         // add annotated classes
         // configuration.addAnnotatedClass(<YOUR ENTITY>.class);
-        configuration.addAnnotatedClass(Package.class);
+        configuration.addAnnotatedClass(Person.class);
+        configuration.addAnnotatedClass(PersonDetail.class);
+        configuration.addAnnotatedClass(Fee.class);
+        configuration.addAnnotatedClass(Note.class);
+        configuration.addAnnotatedClass(NoteWithNameAndAgeDTO.class);
 
     }
 
@@ -84,11 +88,12 @@ public class HibernateConfig {
         return entityManagerFactory;
     }
     public static EntityManagerFactory getEntityManagerFactoryConfigTEST() {
-        if (entityManagerFactory == null) entityManagerFactory = setupHibernateConfigurationForTesting();
+        if (entityManagerFactory == null) entityManagerFactory = buildEntityFactoryConfig();
         return entityManagerFactory;
     }
-    public static EntityManagerFactory getEntityManagerFactory(boolean test,String name){
+    public static EntityManagerFactory getEntityManagerFactoryConfig(boolean test,String name){
         if(test) return getEntityManagerFactoryConfigTEST();
         return getEntityManagerFactoryConfig();
     }
+
 }

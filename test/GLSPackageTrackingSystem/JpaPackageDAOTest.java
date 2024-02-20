@@ -20,7 +20,7 @@ class JpaPackageDAOTest {
             .build();
     @BeforeEach
     void setUp() {
-        emf = HibernateConfig.getEntityManagerFactoryConfig();
+        emf = HibernateConfig.getEntityManagerFactoryConfigTEST();
         em = emf.createEntityManager();
         jpaPackageDAO = JpaPackageDAO.getInstance(emf);
     }

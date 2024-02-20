@@ -1,14 +1,10 @@
-package GLSPackageTrackingSystem;
-
-import exerciseDAO.StudentDAOExercise;
+import GLSPackageTrackingSystem.Package;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import unicorn.Person;
-import unicorn.Unicorn;
 
 import java.util.Properties;
 
@@ -87,8 +83,5 @@ public class HibernateConfig {
         if (entityManagerFactory == null) entityManagerFactory = setupHibernateConfigurationForTesting();
         return entityManagerFactory;
     }
-    public static EntityManagerFactory getEntityManagerFactory(boolean test,String name){
-        if(test) return getEntityManagerFactoryConfigTEST();
-        return getEntityManagerFactoryConfig();
-    }
+
 }
