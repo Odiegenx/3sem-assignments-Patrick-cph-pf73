@@ -24,7 +24,7 @@ public class main {
         // USER STORY 4!
         jpaPersonDAO.getNoteListWithNameAndAge().forEach(System.out::println);
 
-/*        try(EntityManager em = emf.createEntityManager()) {
+      /* try(EntityManager em = emf.createEntityManager()) {
             Person p1 = new Person("Hanzi");
             PersonDetail pd1 = new PersonDetail("Algade 2", 4300, "Holbæk", 45);
             p1.addPersonDetail(pd1);
@@ -32,15 +32,23 @@ public class main {
             Fee f2 = new Fee(125, LocalDate.now());
             Note n1 = new Note("remember birthday", LocalDate.of(2024,03,31));
             Note n2 = new Note("make new lesson plan",LocalDate.of(2024,04,05));
+            Event e1 = new Event("DM-senior",LocalDate.now());
+            Event e2 = new Event("SM-junior",LocalDate.now());
             p1.addFee(f1);
             p1.addFee(f2);
             p1.addNote(n1);
             p1.addNote(n2);
+            p1.addEvent(p1,e1,LocalDate.now(),500);
+            p1.addEvent(p1,e2,LocalDate.now(),1000);
+
             em.getTransaction().begin();
+            em.persist(e1);
+            em.persist(e2);
             em.persist(p1);
             //Person person = em.find(Person.class,1);
             //em.remove(person);
             em.getTransaction().commit();
-        }*/
+        }
+       */
     }
 }

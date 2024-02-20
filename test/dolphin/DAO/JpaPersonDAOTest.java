@@ -19,6 +19,7 @@ class JpaPersonDAOTest {
     @BeforeAll
     static void beforeAll(){
         emf = HibernateConfig.getEntityManagerFactoryConfigTEST();
+        jpaPackageDAO = JpaPersonDAO.getInstance(emf);
         try(EntityManager em = emf.createEntityManager()) {
             basePerson1 = new Person("Hanzi");
             PersonDetail pd1 = new PersonDetail("Algade 2", 4300, "Holbæk", 45);
@@ -52,7 +53,7 @@ class JpaPersonDAOTest {
     }
     @BeforeEach
     void setUp() {
-        jpaPackageDAO = JpaPersonDAO.getInstance(emf);
+
         Person testP = new Person("Frygtløs");
         PersonDetail pd2 = new PersonDetail("testmedtestpå", 9999, "IntetSted", 4);
         Fee testF1 = new Fee(125, LocalDate.now());
@@ -68,7 +69,7 @@ class JpaPersonDAOTest {
     }
     @AfterAll
     static void afterAll(){
-        EntityManager entityManager = emf.createEntityManager();
+       /* EntityManager entityManager = emf.createEntityManager();
         entityManager.getTransaction().begin();
         entityManager.createQuery("delete from Fee").executeUpdate();
         entityManager.createQuery("delete from Note").executeUpdate();
@@ -78,7 +79,7 @@ class JpaPersonDAOTest {
         entityManager.createNativeQuery("ALTER SEQUENCE Note_id_seq RESTART WITH 1").executeUpdate();
         entityManager.createNativeQuery("ALTER SEQUENCE Fee_id_seq RESTART WITH 1").executeUpdate();
         entityManager.getTransaction().commit();
-        entityManager.close();
+        entityManager.close();*/
         emf.close();
     }
     @Test
@@ -87,7 +88,6 @@ class JpaPersonDAOTest {
         try(EntityManager em = emf.createEntityManager()) {
             TypedQuery<Person> query = em.createQuery("select p from Person p where name = ?1", Person.class)
                     .setParameter(1, "Frygtløs");
-            System.out.println("--------------------------------------------------------------------------"+query.getSingleResult().getId());
             assertEquals("Frygtløs", query.getSingleResult().getName());
         }
     }
