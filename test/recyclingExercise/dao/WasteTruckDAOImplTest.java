@@ -130,7 +130,7 @@ class WasteTruckDAOImplTest {
 
     // removeDriverFromWasteTrick() fails as well, since for some reason it's not removing the driver from the truck correctly
     // during the test. It works fine in main.
-    // Maybe something with how im handling the different managed states, but I don't have more time to use on this.
+    // Maybe something with how im handling the different managed states, but I don't have more time figure it out right now.
     @Test
     void removeDriverFromWasteTruck() {
         try(EntityManager em = emf.createEntityManager()){

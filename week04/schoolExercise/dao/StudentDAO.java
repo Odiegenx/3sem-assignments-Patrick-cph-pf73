@@ -1,9 +1,9 @@
-package SchoolExercise.dao;
+package schoolExercise.dao;
 
-import SchoolExercise.Semester;
-import SchoolExercise.Student;
-import SchoolExercise.Teacher;
-import SchoolExercise.dto.StudentInfo;
+import schoolExercise.Semester;
+import schoolExercise.Student;
+import schoolExercise.Teacher;
+import schoolExercise.dto.StudentInfo;
 
 import java.util.List;
 

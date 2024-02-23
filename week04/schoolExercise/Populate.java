@@ -1,10 +1,8 @@
-package SchoolExercise;
+package schoolExercise;
 
-import SchoolExercise.config.HibernateConfig;
-import SchoolExercise.dao.StudentDAOImpl;
+import schoolExercise.config.HibernateConfig;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.TypedQuery;
 
 public class Populate {
     public static void main(String[] args) {

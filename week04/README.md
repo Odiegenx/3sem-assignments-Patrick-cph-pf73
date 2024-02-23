@@ -3,10 +3,14 @@
 ## Overview
 
 - Patrick Fabrin
-- which assignment are included
-- Tests can be found in the Test package.
 
-- I had some problems with 2 of my tests in WasteTruckDAOImplTest. Added notes with details at the issues. 
+This document provides an overview of the completed assignments. Please refer to the Test package for associated tests.
 
-## Friday presentation
-- add the friday presentation into the weekly folder
+Two tests in WasteTruckDAOImplTest encountered issues. Notes regarding these problems are provided in the test files.
+
+The GLS package tracking system remains incomplete. Assignments 6, 9 are missing, and assignment 8 is approximately halfway complete.
+
+Assignment 1: dolpin                       (complete)
+Assignment 2: recyclingExcercise           (complete)
+Assignment 3: schoolExercise               (complete)
+Assignment 4: GLSPackageAndTrackingSystem2 (incomplete)

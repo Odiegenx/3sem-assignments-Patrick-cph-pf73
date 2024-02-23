@@ -1,4 +1,4 @@
-package SchoolExercise.dto;
+package schoolExercise.dto;
 
 import lombok.Getter;
 import lombok.ToString;

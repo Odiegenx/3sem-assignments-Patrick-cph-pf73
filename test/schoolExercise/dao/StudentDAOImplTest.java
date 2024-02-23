@@ -1,10 +1,10 @@
-package SchoolExercise.dao;
+package schoolExercise.dao;
 
-import SchoolExercise.Semester;
-import SchoolExercise.Student;
-import SchoolExercise.Teacher;
-import SchoolExercise.config.HibernateConfig;
-import SchoolExercise.dto.StudentInfo;
+import schoolExercise.Semester;
+import schoolExercise.Student;
+import schoolExercise.Teacher;
+import schoolExercise.config.HibernateConfig;
+import schoolExercise.dto.StudentInfo;
 import jakarta.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

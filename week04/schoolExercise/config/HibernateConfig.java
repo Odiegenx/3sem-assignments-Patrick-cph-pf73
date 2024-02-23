@@ -1,16 +1,14 @@
-package SchoolExercise.config;
+package schoolExercise.config;
 
-import SchoolExercise.Semester;
-import SchoolExercise.Student;
-import SchoolExercise.Teacher;
+import schoolExercise.Semester;
+import schoolExercise.Student;
+import schoolExercise.Teacher;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import recyclingExercise.model.Driver;
-import recyclingExercise.model.WasteTruck;
 
 import java.util.Properties;
 

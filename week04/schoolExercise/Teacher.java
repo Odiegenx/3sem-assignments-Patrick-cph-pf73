@@ -1,4 +1,4 @@
-package SchoolExercise;
+package schoolExercise;
 
 import jakarta.persistence.*;
 import lombok.Getter;
