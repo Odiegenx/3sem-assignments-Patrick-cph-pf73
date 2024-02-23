@@ -21,7 +21,7 @@ public class Note {
     private LocalDate created;
 
     @ToString.Exclude
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Person createdBy;
 
     public Note(String note, LocalDate created) {

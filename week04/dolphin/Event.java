@@ -22,6 +22,7 @@ public class Event {
     private String Name;
     private LocalDate date;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "event",cascade = CascadeType.ALL)
     private Set<PersonEvent> persons = new HashSet<>();
 

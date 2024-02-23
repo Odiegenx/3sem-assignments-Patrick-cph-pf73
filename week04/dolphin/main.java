@@ -23,8 +23,9 @@ public class main {
         System.out.println(jpaPersonDAO.getNotesFromPerson(1));
         // USER STORY 4!
         jpaPersonDAO.getNoteListWithNameAndAge().forEach(System.out::println);
+        jpaPersonDAO.dtoProjection().forEach(System.out::println);
 
-      /* try(EntityManager em = emf.createEntityManager()) {
+    /*   try(EntityManager em = emf.createEntityManager()) {
             Person p1 = new Person("Hanzi");
             PersonDetail pd1 = new PersonDetail("Algade 2", 4300, "Holbæk", 45);
             p1.addPersonDetail(pd1);
@@ -49,6 +50,5 @@ public class main {
             //em.remove(person);
             em.getTransaction().commit();
         }
-       */
-    }
+*/    }
 }

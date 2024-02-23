@@ -15,11 +15,27 @@ class JpaPersonDAOTest {
     static JpaPersonDAO jpaPackageDAO;
     static Person basePerson1;
     static Person basePerson2;
-    Person testPerson;
+    static Person testPerson;
+
     @BeforeAll
     static void beforeAll(){
         emf = HibernateConfig.getEntityManagerFactoryConfigTEST();
         jpaPackageDAO = JpaPersonDAO.getInstance(emf);
+        Person testP = new Person("Frygtløs");
+        PersonDetail pd2 = new PersonDetail("testmedtestpå", 9999, "IntetSted", 4);
+        Fee testF1 = new Fee(125, LocalDate.now());
+        Fee testF2 = new Fee(125, LocalDate.now());
+        Note testN1 = new Note("remember to not be afraid", LocalDate.of(2024,03,31));
+        Note testN2 = new Note("remember: old lady nice, old man not nice",LocalDate.of(2024,04,05));
+        testP.addPersonDetail(pd2);
+        testP.addFee(testF1);
+        testP.addFee(testF2);
+        testP.addNote(testN1);
+        testP.addNote(testN2);
+        testPerson = testP;
+    }
+    @BeforeEach
+    void setUp() {
         try(EntityManager em = emf.createEntityManager()) {
             basePerson1 = new Person("Hanzi");
             PersonDetail pd1 = new PersonDetail("Algade 2", 4300, "Holbæk", 45);
@@ -44,28 +60,16 @@ class JpaPersonDAOTest {
             basePerson2.addFee(f4);
             basePerson2.addNote(n3);
             basePerson2.addNote(n4);
-
             em.getTransaction().begin();
+            em.createQuery("delete from Fee").executeUpdate();
+            em.createQuery("delete from Note").executeUpdate();
+            em.createQuery("delete from PersonDetail ").executeUpdate();
+            em.createQuery("delete from Person").executeUpdate();
+            em.createNativeQuery("ALTER SEQUENCE person_id_seq RESTART WITH 1").executeUpdate();
             em.persist(basePerson1);
             em.persist(basePerson2);
             em.getTransaction().commit();
         }
-    }
-    @BeforeEach
-    void setUp() {
-
-        Person testP = new Person("Frygtløs");
-        PersonDetail pd2 = new PersonDetail("testmedtestpå", 9999, "IntetSted", 4);
-        Fee testF1 = new Fee(125, LocalDate.now());
-        Fee testF2 = new Fee(125, LocalDate.now());
-        Note testN1 = new Note("remember to not be afraid", LocalDate.of(2024,03,31));
-        Note testN2 = new Note("remember: old lady nice, old man not nice",LocalDate.of(2024,04,05));
-        testP.addPersonDetail(pd2);
-        testP.addFee(testF1);
-        testP.addFee(testF2);
-        testP.addNote(testN1);
-        testP.addNote(testN2);
-        testPerson = testP;
     }
     @AfterAll
     static void afterAll(){
@@ -112,10 +116,10 @@ class JpaPersonDAOTest {
     void delete() {
         try(EntityManager em = emf.createEntityManager()) {
             TypedQuery<Person> query = em.createQuery("select p from Person p", Person.class);
-            assertEquals(3, query.getResultList().size());
-            jpaPackageDAO.delete(3);
-            TypedQuery<Person> query1 = em.createQuery("select p from Person p", Person.class);
             assertEquals(2, query.getResultList().size());
+            jpaPackageDAO.delete(2);
+            TypedQuery<Person> query1 = em.createQuery("select p from Person p", Person.class);
+            assertEquals(1, query.getResultList().size());
         }
     }
 

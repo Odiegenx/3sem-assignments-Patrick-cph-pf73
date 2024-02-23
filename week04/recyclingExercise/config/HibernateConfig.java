@@ -1,3 +1,5 @@
+package recyclingExercise.config;
+
 import GLSPackageTrackingSystem.Package;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
@@ -5,6 +7,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import recyclingExercise.model.Driver;
+import recyclingExercise.model.WasteTruck;
 
 import java.util.Properties;
 
@@ -19,12 +23,12 @@ public class HibernateConfig {
 
             Properties props = new Properties();
 
-            props.put("hibernate.connection.url", "jdbc:postgresql://localhost:5432/exercise?currentSchema=public");
+            props.put("hibernate.connection.url", "jdbc:postgresql://localhost:5432/recycling?currentSchema=public");
             props.put("hibernate.connection.username", "postgres");
             props.put("hibernate.connection.password", "postgres");
             props.put("hibernate.show_sql", "false"); // show sql in console
-            props.put("hibernate.format_sql", "false"); // format sql in console
-            props.put("hibernate.use_sql_comments", "false"); // show sql comments in console
+            props.put("hibernate.format_sql", "true"); // format sql in console
+            props.put("hibernate.use_sql_comments", "true"); // show sql comments in console
 
             props.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect"); // dialect for postgresql
             props.put("hibernate.connection.driver_class", "org.postgresql.Driver"); // driver class for postgresql
@@ -71,17 +75,21 @@ public class HibernateConfig {
     private static void getAnnotationConfiguration(Configuration configuration) {
         // add annotated classes
         // configuration.addAnnotatedClass(<YOUR ENTITY>.class);
-        configuration.addAnnotatedClass(Package.class);
+        configuration.addAnnotatedClass(Driver.class);
+        configuration.addAnnotatedClass(WasteTruck.class);
 
     }
 
-    public static EntityManagerFactory getEntityManagerFactoryConfig() {
+    private static EntityManagerFactory getEntityManagerFactoryConfigNormal() {
         if (entityManagerFactory == null) entityManagerFactory = buildEntityFactoryConfig();
         return entityManagerFactory;
     }
-    public static EntityManagerFactory getEntityManagerFactoryConfigTEST() {
+    private static EntityManagerFactory getEntityManagerFactoryConfigTEST() {
         if (entityManagerFactory == null) entityManagerFactory = setupHibernateConfigurationForTesting();
         return entityManagerFactory;
     }
-
+    public static EntityManagerFactory getEntityManagerFactoryConfig(boolean isTest){
+        if(isTest) return getEntityManagerFactoryConfigTEST();
+        return getEntityManagerFactoryConfigNormal();
+    }
 }

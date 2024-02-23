@@ -17,8 +17,10 @@ public class PersonEvent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @ToString.Exclude
     @ManyToOne
     private Person person;
+    @ToString.Exclude
     @ManyToOne
     private Event event;
     private LocalDate signupDate;

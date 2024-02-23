@@ -22,7 +22,7 @@ public class Fee {
 
     // fordi at en person kan have mange fees!
     @ToString.Exclude
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Person person;
     public Fee(int amount, LocalDate payDate) {
         this.amount = amount;

@@ -39,7 +39,7 @@ public class Person
     @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Set<Note> notes = new HashSet<>();
 
-    @OneToMany(mappedBy = "person",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "person",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<PersonEvent> events = new HashSet<>();
 
     // relationer m:m

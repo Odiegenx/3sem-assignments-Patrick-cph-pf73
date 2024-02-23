@@ -50,7 +50,9 @@ public class JpaPersonDAO implements PersonDAO{
             Person tmpPerson = personTypedQuery.getSingleResult();
             if(tmpPerson != null){
                 person.setId(tmpPerson.getId());
+                person.getPersonDetail().setId(tmpPerson.getId());
                 Person toMerge = em.merge(person);
+                em.getTransaction().commit();
                 return toMerge;
             }
             em.getTransaction().rollback();
@@ -110,15 +112,6 @@ public class JpaPersonDAO implements PersonDAO{
     // USER STORY 4!
     @Override
     public List<NoteWithNameAndAgeDTO> getNoteListWithNameAndAge() {
-        /*try(EntityManager em = emf.createEntityManager()) {
-            TypedQuery<NoteWithNameAndAgeDTO> query = em.createNamedQuery(
-                    "SELECT NEW NoteWithNameAndAgeDTO(n.note, p.name, pd.age) " +
-                            "FROM Note n " +
-                            "JOIN n.createdBy p " +
-                            "JOIN p.personDetail pd", NoteWithNameAndAgeDTO.class);
-            return query.getResultList();
-            }
-         */
             List<Person> personList = readAll();
             List<NoteWithNameAndAgeDTO> noteWithNameAndAgeDTOS = personList.stream()
                     .flatMap(person -> person.getNotes()
@@ -126,5 +119,15 @@ public class JpaPersonDAO implements PersonDAO{
                             .map(note -> new NoteWithNameAndAgeDTO(note,person.getName(),person.getPersonDetail().getAge())))
                     .collect(Collectors.toCollection(ArrayList::new));
             return noteWithNameAndAgeDTOS;
+        }
+        public List<NoteWithNameAndAgeDTO> dtoProjection(){
+            try(EntityManager em = emf.createEntityManager()) {
+            TypedQuery<NoteWithNameAndAgeDTO> query = em.createQuery(
+                    "SELECT NEW dolphin.DTO.NoteWithNameAndAgeDTO(n, p.name, pd.age) " +
+                            "FROM Note n " +
+                            "JOIN n.createdBy p " +
+                            "JOIN p.personDetail pd", NoteWithNameAndAgeDTO.class);
+            return query.getResultList();
+            }
         }
 }

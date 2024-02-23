@@ -1,9 +1,6 @@
 package dolphin;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.MapsId;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,7 +21,7 @@ public class PersonDetail {
 
     // Relationer 1:1
     @ToString.Exclude
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @MapsId// means it should take the persons id and use it as an id in PersonDetail
     private Person person;
 
