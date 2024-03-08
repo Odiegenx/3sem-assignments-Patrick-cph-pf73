@@ -2,9 +2,10 @@
 
 ## Overview
 
-- Your name
-- which assignment are included
-- which one are completed and which one are not
+- Patrick Fabrin
 
-## Friday presentation
-- add the friday presentation into the weekly folder
+Assignment 1: dogExcercise                       (complete)
+Assignment 2: theVeterinarian 			         (complete)
+Assignment 3: exerciseWithJavalinAndCrud         (complete)
+
+assignment 3 is missing the optional parts. 
