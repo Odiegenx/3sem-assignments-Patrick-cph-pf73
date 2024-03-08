@@ -1,5 +1,7 @@
 package dolphin.DAO;
 
+import jakarta.persistence.EntityManagerFactory;
+
 import java.util.List;
 
 public interface DAO<T> {
@@ -8,4 +10,5 @@ public interface DAO<T> {
     public T update(T t,int id);
     public void delete(int id);
     List<T> readAll();
+
 }

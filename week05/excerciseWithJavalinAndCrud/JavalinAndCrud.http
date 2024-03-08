@@ -1,0 +1,71 @@
+GET http://localhost:7007/api/hello?name=Patrick
+###
+
+// Request and Response Handling:
+
+/// In this example, we parse the "name" as a query parameter from the request
+// and respond with a personalized greeting.
+
+GET http://localhost:7007/api/hotels
+###
+
+GET http://localhost:7007/api/hotels/hotel/1
+###
+
+GET http://localhost:7007/api/hotels/hotel/1/rooms
+###
+
+POST http://localhost:7007/api/hotels/hotel
+
+{
+    "name": "Charmander's Hjem",
+    "address": "Ildvej 7",
+    "rooms": [
+        {
+            "number": 1,
+            "price": 5000
+        },
+        {
+            "number": 2,
+            "price": 3000
+        }
+    ]
+}
+###
+POST http://localhost:7007/api/hotels/hotel
+
+{
+    "name": "Zoey's Hjem",
+    "address": "Hundehus 7"
+}
+###
+
+PUT http://localhost:7007/api/hotels/hotel/1
+
+{
+    "name": "Charmander's Chillplace"
+}
+###
+DELETE http://localhost:7007/api/hotels/hotel/4
+###
+
+GET http://localhost:7007/api/hotels/rooms/room/5
+###
+POST http://localhost:7007/api/hotels/rooms/room
+
+{
+"hotelId": 1,
+"number": 1,
+"price": 100
+}
+###
+PUT http://localhost:7007/api/hotels/rooms/room/1
+
+{
+"hotelId": 1,
+ "number": 1234,
+ "price": 333
+}
+###
+
+DELETE http://localhost:7007/api/hotels/rooms/room/8

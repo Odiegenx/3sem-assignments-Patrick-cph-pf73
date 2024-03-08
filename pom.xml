@@ -20,6 +20,7 @@
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
@@ -148,6 +149,12 @@
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.32</version> <!-- or the latest version available -->
         </dependency>
+        <dependency>
+            <groupId>io.javalin</groupId>
+            <artifactId>javalin</artifactId>
+            <version>5.5.0</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>

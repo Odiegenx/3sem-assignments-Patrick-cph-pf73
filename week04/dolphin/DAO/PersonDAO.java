@@ -5,6 +5,7 @@ import dolphin.DTO.NoteWithNameAndAgeDTO;
 import dolphin.Fee;
 import dolphin.Note;
 import dolphin.Person;
+import jakarta.persistence.EntityManagerFactory;
 
 import java.util.List;
 import java.util.Set;

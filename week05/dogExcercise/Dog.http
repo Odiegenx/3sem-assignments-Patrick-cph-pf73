@@ -1,0 +1,26 @@
+GET http://localhost:7007/api/dogs
+###
+GET http://localhost:7007/api/dogs/dog/1
+###
+GET http://localhost:7007/api/dogs/100
+###
+POST http://localhost:7007/api/dogs/dog
+
+{
+"name":"Holger",
+"breed":"Rotweiler",
+"gender":"Male",
+"age":34
+}
+###
+PUT http://localhost:7007/api/dogs/dog/1
+
+{
+"name":"Roling",
+"age":10,
+"breed":"Rotweiler",
+"gender":"Male"
+}
+###
+DELETE http://localhost:7007/api/dogs/dog/3
+###

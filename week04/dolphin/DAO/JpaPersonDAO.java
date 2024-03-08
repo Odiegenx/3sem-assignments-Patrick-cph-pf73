@@ -78,6 +78,15 @@ public class JpaPersonDAO implements PersonDAO{
         }
     }
 
+   /* @Override
+    public DAO<Person> getInstance(EntityManagerFactory emf_) {
+        if(instance == null){
+            emf = emf_;
+            instance = new JpaPersonDAO();
+        }
+        return instance;
+    }*/
+
     @Override
     public void addNoteToPerson(Note note, int id) {
 
