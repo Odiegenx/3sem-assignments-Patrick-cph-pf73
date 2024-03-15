@@ -1,4 +1,4 @@
-GET http://localhost:7007/api/hello?name=Patrick
+GET http://localhost:7007/api/hotels/hello?name=Patrick
 ###
 
 // Request and Response Handling:
@@ -49,7 +49,7 @@ PUT http://localhost:7007/api/hotels/hotel/1
 DELETE http://localhost:7007/api/hotels/hotel/4
 ###
 
-GET http://localhost:7007/api/hotels/rooms/room/5
+GET http://localhost:7007/api/hotels/rooms/room/1
 ###
 POST http://localhost:7007/api/hotels/rooms/room
 
@@ -69,3 +69,28 @@ PUT http://localhost:7007/api/hotels/rooms/room/1
 ###
 
 DELETE http://localhost:7007/api/hotels/rooms/room/8
+###
+POST http://localhost:7007/api/hotels/auth/register
+
+
+{
+    "username": "PatrickAdmin",
+    "password": "1234",
+    "roles": [
+        {"name": "admin"}
+    ]
+}
+###
+
+POST http://localhost:7007/api/hotels/auth/login
+
+{
+    "username": "Patrick2",
+    "password": "1234"
+}
+###
+GET http://localhost:7007/api/hotels/protected/user
+Authorization: Bearer eyJhbciOiJIUzI1NiJ9.eyJpc3MiOiJQYXRyaWNrIiwic3ViIjoiUGF0cmljazIiLCJleHAiOjE3MTA1MzQxMTksInJvbGVzIjoidXNlciIsInVzZXJuYW1lIjoiUGF0cmljazIifQ.3SnEBK-qfkb2JQJHboKt_QTxI5IxsmnVBDvCMC0bOd4
+###
+GET http://localhost:7007/api/hotels/protected/admin
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJQYXRyaWNrIiwic3ViIjoiUGF0cmlja0FkbWluIiwiZXhwIjoxNzEwNTM1NTkyLCJyb2xlcyI6ImFkbWluIiwidXNlcm5hbWUiOiJQYXRyaWNrQWRtaW4ifQ.PsWhgVh1C2Qku-0EFQ3azyia4GaUehWm012yLz_WFDI

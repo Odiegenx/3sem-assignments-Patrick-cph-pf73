@@ -19,7 +19,7 @@ public class Hotel {
     private String name;
     private String address;
 
-    @OneToMany(/*mappedBy = "hotel",*/cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "hotel",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Room> rooms = new ArrayList<>();
 
     public Hotel(String name,String address){

@@ -19,8 +19,8 @@ public class HotelController {
 
     private static HotelDAO hotelDAO;
 
-    public HotelController(){
-        hotelDAO = HotelDAO.getInstance();
+    public HotelController(boolean isTest){
+        hotelDAO = HotelDAO.getInstance(isTest);
     }
 
 
@@ -57,7 +57,7 @@ public class HotelController {
         HotelDTO hotelDTO = ctx.bodyAsClass(HotelDTO.class);
         Hotel hotel = new Hotel(hotelDTO.getName(), hotelDTO.getAddress());
         if(hotelDTO.getRooms() != null) {
-            hotelDTO.getRooms().stream().forEach(x -> hotel.addRoom(x));
+            hotelDTO.getRooms().forEach(x -> hotel.addRoom(x));
         }
         hotelDAO.create(hotel);
         ctx.json(hotel);

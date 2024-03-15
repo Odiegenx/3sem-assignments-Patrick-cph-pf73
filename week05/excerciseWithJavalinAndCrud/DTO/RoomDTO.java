@@ -17,4 +17,7 @@ public class RoomDTO {
     public RoomDTO(){
 
     }
+    public RoomDTO(int price){
+        this.price = price;
+    }
 }

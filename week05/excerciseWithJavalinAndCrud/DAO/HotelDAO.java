@@ -6,12 +6,12 @@ import jakarta.persistence.EntityManagerFactory;
 public class HotelDAO extends DAO<Hotel,Integer>{
     private static HotelDAO instance;
 
-    private HotelDAO() {
-        super(Hotel.class);
+    private HotelDAO(boolean isTest) {
+        super(Hotel.class,isTest);
     }
-    public static HotelDAO getInstance(){
+    public static HotelDAO getInstance(boolean isTest){
         if(instance == null){
-            instance = new HotelDAO();
+            instance = new HotelDAO(isTest);
         }
         return instance;
     }

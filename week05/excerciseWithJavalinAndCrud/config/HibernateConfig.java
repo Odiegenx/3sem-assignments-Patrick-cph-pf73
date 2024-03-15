@@ -2,6 +2,8 @@ package excerciseWithJavalinAndCrud.config;
 
 import excerciseWithJavalinAndCrud.model.Hotel;
 import excerciseWithJavalinAndCrud.model.Room;
+import excerciseWithJavalinAndCrud.secrurity.Role;
+import excerciseWithJavalinAndCrud.secrurity.User;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
 import org.hibernate.SessionFactory;
@@ -78,6 +80,8 @@ public class HibernateConfig {
         // configuration.addAnnotatedClass(<YOUR ENTITY>.class);
         configuration.addAnnotatedClass(Room.class);
         configuration.addAnnotatedClass(Hotel.class);
+        configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Role.class);
     }
 
     private static EntityManagerFactory getEntityManagerFactoryConfigNormal() {

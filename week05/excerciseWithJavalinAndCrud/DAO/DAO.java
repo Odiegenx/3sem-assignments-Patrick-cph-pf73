@@ -10,21 +10,24 @@ import java.util.List;
 public abstract class DAO<T, D> implements IDAO<T,D> {
 
     Class<T> objectClass;
-    public static EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig(false);
+    static boolean isTest;
+    public static EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig(isTest);
 
-    public DAO(Class<T> tClass){
+    public DAO(Class<T> tClass,boolean isTest){
         this.objectClass = tClass;
+        this.isTest = isTest;
     }
     public T getById(D id) {
         try(EntityManager em = emf.createEntityManager()) {
             return em.find(objectClass,id);
         }
     }
-    public void create(T t) {
+    public T create(T t) {
         try(EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.persist(t);
             em.getTransaction().commit();
+            return t;
         }
     }
     public T update(T t, D id) {

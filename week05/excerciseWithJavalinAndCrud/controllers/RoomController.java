@@ -8,22 +8,27 @@ import excerciseWithJavalinAndCrud.model.Hotel;
 import excerciseWithJavalinAndCrud.model.Room;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import jakarta.persistence.EntityManager;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class RoomController {
 
     private static RoomDAO roomDAO;
 
-    public RoomController(){
-        roomDAO = RoomDAO.getInstance();
+    public RoomController(boolean isTest){
+        roomDAO = RoomDAO.getInstance(isTest);
     }
     public static Handler getRooms() {
         return ctx -> {
-            ctx.result("hej");
+            List<Room> roomList = roomDAO.getAll();
+            List<RoomDTO> roomDTOList = roomList.stream().map(x -> new RoomDTO(x.getId(), x.getHotelId(), x.getNumber(), x.getPrice())).toList();
+            //roomDTOList.forEach(System.out::println);
+            ctx.json(roomDTOList);
         };
     }
 
@@ -38,7 +43,7 @@ public class RoomController {
         RoomDTO roomDTO = ctx.bodyAsClass(RoomDTO.class);
         if(roomDTO != null) {
             Room room = new Room(roomDTO.getHotelId(), roomDTO.getNumber(), roomDTO.getPrice());
-            Hotel hotel = HotelDAO.getInstance().getById(room.getHotelId());
+            Hotel hotel = HotelDAO.getInstance(false).getById(room.getHotelId());
             room.setHotel(hotel);
             roomDAO.create(room);
             ctx.json(room);
@@ -93,7 +98,7 @@ public class RoomController {
                     if (dtoField.getType().equals(roomField.getType())) {
                         Object dtoFieldValue = dtoField.get(roomDTO);
                         // if the value gotten is not null it sets the hotels field to the value of the dto field.
-                        if (dtoFieldValue != null) {
+                        if (dtoFieldValue != null && !dtoFieldValue.equals(0)) {
                             roomField.set(room, dtoFieldValue);
                         }
                     }
