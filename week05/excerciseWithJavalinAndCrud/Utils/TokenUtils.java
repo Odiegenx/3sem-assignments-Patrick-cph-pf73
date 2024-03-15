@@ -19,6 +19,8 @@ public class TokenUtils {
     /*- and `Utils.createToken` is a method that creates a JWT token from a user
 ```java*/
     private static byte[] keyBytes;
+
+    // should not be hard coded... but could not get it to work any other way.
     private static String secretKey = "qFjk3Pv2gHs5qDx8rTk7zSv5yBf8gNm7tBc4eMw1uVn3iAw5tKy2rHc6xJe9wXl2oPj4rTk6zSn8yBd5eNg7tBf4gHs7qDx9rVu2";
 
     private static TokenUtils instance;
@@ -29,6 +31,7 @@ public class TokenUtils {
         }
         return instance;
     }
+    // below function provided by teacher made minor changes:
     public static String createToken(UserDTO user, String ISSUER, String TOKEN_EXPIRE_TIME, String SECRET_KEY) throws ApiException {
         // https://codecurated.com/blog/introduction-to-jwt-jws-jwe-jwa-jwk/
         try {
@@ -65,6 +68,7 @@ public class TokenUtils {
         // Encode the random bytes using Base64 encoding
         return Base64.getEncoder().encodeToString(randomBytes);
     }
+
     public static UserDTO validateAndExtractUserFromToken(String token) {
         try {
             // Parse the JWT token
@@ -88,21 +92,13 @@ public class TokenUtils {
             // Create and return UserDTO
             return new UserDTO(username, password, roles);
         } catch (JOSEException | ParseException e) {
-            e.printStackTrace(); // Log the exception for debugging
-            return null; // Token parsing or verification failed
+            e.printStackTrace(); // TODO add better exception handling
+            return null;
         }
     }
 
     private static String extractRolesFromClaims(JWTClaimsSet claims) throws ParseException {
-        // Extract roles directly from JWT claims and convert them to a Set<Role>
-        // For example:
-        // Set<String> rolesClaim = claims.getStringListClaim("roles");
-        // Set<Role> roles = rolesClaim.stream().map(Role::valueOf).collect(Collectors.toSet());
-        // return roles;
-        // Adjust this according to how roles are stored in your JWT claims
-
-        // Assuming roles are stored as a Set of strings in the "roles" claim
-        return claims.getStringClaim("roles"); // Replace this with the actual implementation
+        return claims.getStringClaim("roles");
     }
 }
 

@@ -46,7 +46,7 @@ public class Routes {
     private static EndpointGroup getSecrurityRoutes() {
         return () -> {
             path("/auth", () -> {
-                //before(SecurityController::authenticate);
+                before(SecurityController::authenticate);
                 post("/register", UserController::registerUser, RoleType.ANYONE);
                 post("/login",UserController::login, RoleType.ANYONE);
             });

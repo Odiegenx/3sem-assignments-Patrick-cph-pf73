@@ -85,7 +85,7 @@ POST http://localhost:7007/api/hotels/auth/register
 POST http://localhost:7007/api/hotels/auth/login
 
 {
-    "username": "Patrick2",
+    "username": "PatrickAdmin",
     "password": "1234"
 }
 ###
