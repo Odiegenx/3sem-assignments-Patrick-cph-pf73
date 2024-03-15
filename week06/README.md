@@ -4,6 +4,8 @@
 
 - Patrick Fabrin
 
+Part I: Testing the Hotel API: 
+
 The assignment was a continuation from the previous week's work, located in the week 5 assignment folder.
 Detailed instructions on where to find specific tasks and implementations are provided below:
 
@@ -12,6 +14,10 @@ Testing of Endpoints:
 Testing of original endpoints from last weeks assignment has been completed.
 Test files can be found in the excerciseWithJavalinAndCrud -> controllers directory.
 Specifically, look for RestAssurredHotelTest and RestAssuedRoomTests for endpoint testing.
+
+I did not have time to implement tests for the different DAO's.
+
+Part II: Security Exercise:
 
 Part 1: Hashing Passwords (Completed):
 
