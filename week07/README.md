@@ -4,7 +4,7 @@ Overview:
 
 Patrick Fabrin
 
-Since we should comeplete the Hotel assigment this week. and I did it last week i've added the same discibtion from last week, just with added links for ease of navigation:
+Since we should comeplete the Hotel assigment this week. and I did it last week i've added the same disciption from last week, just with added links for ease of navigation:
 
 Part I: Testing the Hotel API:
 
