@@ -7,15 +7,18 @@ GET http://localhost:7007/api/hotels/hello?name=Patrick
 // and respond with a personalized greeting.
 
 GET http://localhost:7007/api/hotels
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJQYXRyaWNrIiwic3ViIjoiUGF0cmlja0FkbWluIiwiZXhwIjoxNzExMDk1NjI3LCJyb2xlcyI6ImFkbWluIiwidXNlcm5hbWUiOiJQYXRyaWNrQWRtaW4ifQ.LeTZB4HAaNpacsK0esttscxVoYRNllTAsrg0DbdhlVY
 ###
 
 GET http://localhost:7007/api/hotels/hotel/1
 ###
 
 GET http://localhost:7007/api/hotels/hotel/1/rooms
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJQYXRyaWNrIiwic3ViIjoiUGF0cmlja0FkbWluIiwiZXhwIjoxNzExMDk1NjI3LCJyb2xlcyI6ImFkbWluIiwidXNlcm5hbWUiOiJQYXRyaWNrQWRtaW4ifQ.LeTZB4HAaNpacsK0esttscxVoYRNllTAsrg0DbdhlVY
 ###
 
 POST http://localhost:7007/api/hotels/hotel
+Authorization: Bearer Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJQYXRyaWNrIiwic3ViIjoiUGF0cmlja1VzZXIiLCJleHAiOjE3MTEwOTU3NzQsInJvbGVzIjoidXNlciIsInVzZXJuYW1lIjoiUGF0cmlja1VzZXIifQ.26eKYk7O16Su3NSkmlAYVlcZ-ESUacV_AxvlAk5USqc
 
 {
     "name": "Charmander's Hjem",
@@ -31,6 +34,7 @@ POST http://localhost:7007/api/hotels/hotel
         }
     ]
 }
+
 ###
 POST http://localhost:7007/api/hotels/hotel
 
@@ -74,10 +78,10 @@ POST http://localhost:7007/api/hotels/auth/register
 
 
 {
-    "username": "PatrickAdmin",
+    "username": "PatrickUser",
     "password": "1234",
     "roles": [
-        {"name": "admin"}
+        {"name": "user"}
     ]
 }
 ###
@@ -85,12 +89,12 @@ POST http://localhost:7007/api/hotels/auth/register
 POST http://localhost:7007/api/hotels/auth/login
 
 {
-    "username": "PatrickAdmin",
+    "username": "PatrickUser",
     "password": "1234"
 }
 ###
 GET http://localhost:7007/api/hotels/protected/user
-Authorization: Bearer eyJhbciOiJIUzI1NiJ9.eyJpc3MiOiJQYXRyaWNrIiwic3ViIjoiUGF0cmljazIiLCJleHAiOjE3MTA1MzQxMTksInJvbGVzIjoidXNlciIsInVzZXJuYW1lIjoiUGF0cmljazIifQ.3SnEBK-qfkb2JQJHboKt_QTxI5IxsmnVBDvCMC0bOd4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJQYXRyaWNrIiwic3ViIjoiUGF0cmlja0FkbWluIiwiZXhwIjoxNzEwNzUwMzM3LCJyb2xlcyI6ImFkbWluIiwidXNlcm5hbWUiOiJQYXRyaWNrQWRtaW4ifQ.S3HmQU0WtfLedyy1tbQSOM8NmnFWcTspZfs_ijRTM44
 ###
 GET http://localhost:7007/api/hotels/protected/admin
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJQYXRyaWNrIiwic3ViIjoiUGF0cmlja0FkbWluIiwiZXhwIjoxNzEwNTM1NTkyLCJyb2xlcyI6ImFkbWluIiwidXNlcm5hbWUiOiJQYXRyaWNrQWRtaW4ifQ.PsWhgVh1C2Qku-0EFQ3azyia4GaUehWm012yLz_WFDI
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJQYXRyaWNrIiwic3ViIjoiUGF0cmlja0FkbWluIiwiZXhwIjoxNzEwNzUwMzM3LCJyb2xlcyI6ImFkbWluIiwidXNlcm5hbWUiOiJQYXRyaWNrQWRtaW4ifQ.S3HmQU0WtfLedyy1tbQSOM8NmnFWcTspZfs_ijRTM44

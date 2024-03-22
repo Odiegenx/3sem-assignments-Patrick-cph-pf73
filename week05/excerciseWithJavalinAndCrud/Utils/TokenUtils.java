@@ -73,13 +73,11 @@ public class TokenUtils {
         try {
             // Parse the JWT token
             SignedJWT signedJWT = SignedJWT.parse(token);
-
             // Verify the token's signature with the secret key
             JWSVerifier verifier = new MACVerifier(secretKey);
             if (!signedJWT.verify(verifier)) {
                 return null; // Signature verification failed
             }
-
             // Extract JWT claims
             JWTClaimsSet claims = signedJWT.getJWTClaimsSet();
 
